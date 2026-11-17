@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Backrooms: Null Sector</string>
+    <string name="tagline_camcorder">HANDYCAM VH-98 // TAPE ARCHIVE</string>
+    <string name="action_play_new_tape">INSERT NEW TAPE</string>
+    <string name="action_archive">SURVIVAL ARCHIVE</string>
+    <string name="action_codex">ANOMALY CODEX</string>
+    <string name="action_settings">CAMCORDER SETUP</string>
+    <string name="action_resume">RESUME TAPE</string>
+    <string name="action_eject_tape">EJECT TAPE</string>
+    <string name="action_record_again">RECORD NEW TAPE</string>
+    <string name="action_return_deck">RETURN TO DECK</string>
+    <string name="label_best_distance">FURTHEST DEPTH</string>
+    <string name="label_total_tapes">TAPES LOGGED</string>
+    <string name="label_distance_unit">m</string>
+    <string name="label_rec">REC</string>
+    <string name="label_paused">TAPE PAUSED</string>
+    <string name="label_tape_severed">NO SIGNAL // TAPE SEVERED</string>
+    <string name="label_new_record">NEW DEPTH RECORD</string>
+    <string name="label_flashlight">LIGHT</string>
+    <string name="label_sprint">SPRINT</string>
+    <string name="label_almond_water">WATER</string>
+    <string name="label_pause">PAUSE</string>
+    <string name="cd_viewfinder">First-person camcorder viewfinder. Drag to look around.</string>
+    <string name="cd_move_stick">Virtual movement joystick</string>
+    <string name="cd_flashlight_toggle">Toggle camcorder flashlight</string>
+    <string name="cd_sprint_button">Hold to sprint</string>
+    <string name="cd_almond_water">Use Almond Water to restore signal sanity</string>
+    <string name="cd_pause_button">Pause recording</string>
+    <string name="cd_back_button">Navigate back</string>
+    <string name="empty_archive_title">NO RECOVERED TAPES</string>
+    <string name="empty_archive_body">Insert a new tape to begin exploring the Backrooms. Every survived meter is logged locally.</string>
+    <string name="locked_entry_title">[SIGNAL UNVERIFIED]</string>
+    <string name="locked_entry_body">Venture deeper from spawn to encounter and document this phenomenon.</string>
+</resources>

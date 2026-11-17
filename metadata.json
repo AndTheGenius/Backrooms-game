@@ -1,0 +1,6 @@
+{
+  "name": "Backrooms: Null Sector",
+  "description": "Offline first-person VHS camcorder survival horror game exploring infinite shifting Backrooms anomalies.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
