@@ -1,0 +1,22 @@
+name: BackroomsNullSector
+options:
+  bundleIdPrefix: com.aistudio
+  deploymentTarget:
+    iOS: "16.0"
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    PRODUCT_NAME: BackroomsNullSector
+targets:
+  BackroomsNullSector:
+    type: application
+    platform: iOS
+    sources:
+      - path: BackroomsNullSector
+    info:
+      path: BackroomsNullSector/Info.plist
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.aistudio.backrooms.nxkpmz
+        TARGETED_DEVICE_FAMILY: "1,2"
+        GENERATE_INFOPLIST_FILE: NO

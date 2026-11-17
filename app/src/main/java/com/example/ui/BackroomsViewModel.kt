@@ -2,11 +2,13 @@ package com.example.ui
 
 import android.app.Application
 import android.content.Context
+import android.graphics.Bitmap
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.data.BackroomsDatabase
@@ -60,9 +62,13 @@ class BackroomsViewModel(application: Application) : AndroidViewModel(applicatio
     private val textures = ProceduralTextures()
     private val renderer = RaycasterRenderer(textures)
     private val audioEngine = AudioSynthEngine()
+    private val androidBitmap = Bitmap.createBitmap(
+        RaycasterRenderer.WIDTH,
+        RaycasterRenderer.HEIGHT,
+        Bitmap.Config.ARGB_8888
+    )
 
-    val frameBitmap: ImageBitmap
-        get() = renderer.imageBitmap
+    val frameBitmap: ImageBitmap = androidBitmap.asImageBitmap()
 
     val settings: StateFlow<CamcorderSettings> = repository.settings
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), CamcorderSettings())
@@ -177,6 +183,15 @@ class BackroomsViewModel(application: Application) : AndroidViewModel(applicatio
             items = engine.items,
             anomalies = engine.anomalies
         )
+        androidBitmap.setPixels(
+            renderer.pixels,
+            0,
+            RaycasterRenderer.WIDTH,
+            0,
+            0,
+            RaycasterRenderer.WIDTH,
+            RaycasterRenderer.HEIGHT
+        )
         _hudState.value = initial.copy(frameVersion = 1L)
         _debriefRun.value = null
 
@@ -288,6 +303,15 @@ class BackroomsViewModel(application: Application) : AndroidViewModel(applicatio
                     safetyMode = cfg.glitchSafetyMode,
                     items = engine.items,
                     anomalies = engine.anomalies
+                )
+                androidBitmap.setPixels(
+                    renderer.pixels,
+                    0,
+                    RaycasterRenderer.WIDTH,
+                    0,
+                    0,
+                    RaycasterRenderer.WIDTH,
+                    RaycasterRenderer.HEIGHT
                 )
 
                 audioEngine.updateParameters(

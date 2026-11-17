@@ -1,0 +1,50 @@
+name: Build iOS IPA
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "ios/**"
+      - ".github/workflows/ios-build.yml"
+
+jobs:
+  build-ios:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate Xcode project
+        working-directory: ios
+        run: xcodegen generate
+
+      - name: Build iOS App Bundle
+        working-directory: ios
+        run: |
+          xcodebuild \
+            -project BackroomsNullSector.xcodeproj \
+            -scheme BackroomsNullSector \
+            -configuration Release \
+            -sdk iphoneos \
+            -derivedDataPath build \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            clean build
+
+      - name: Package Unsigned IPA
+        working-directory: ios
+        run: |
+          mkdir -p ipa_stage/Payload
+          cp -r build/Build/Products/Release-iphoneos/BackroomsNullSector.app ipa_stage/Payload/
+          cd ipa_stage
+          zip -r ../BackroomsNullSector-unsigned.ipa Payload
+
+      - name: Upload IPA Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: BackroomsNullSector-unsigned-ipa
+          path: ios/BackroomsNullSector-unsigned.ipa

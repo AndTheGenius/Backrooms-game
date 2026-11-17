@@ -1,8 +1,5 @@
 package com.example.engine
 
-import android.graphics.Bitmap
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.asImageBitmap
 import kotlin.math.abs
 import kotlin.math.cos
 import kotlin.math.floor
@@ -22,10 +19,8 @@ class RaycasterRenderer(
     }
 
     private val rawPixels = IntArray(WIDTH * HEIGHT)
-    private val postPixels = IntArray(WIDTH * HEIGHT)
+    val pixels = IntArray(WIDTH * HEIGHT)
     private val zBuffer = FloatArray(WIDTH)
-    private val bitmap: Bitmap = Bitmap.createBitmap(WIDTH, HEIGHT, Bitmap.Config.ARGB_8888)
-    val imageBitmap: ImageBitmap = bitmap.asImageBitmap()
 
     private val spriteDistances = ArrayList<Pair<Int, Float>>(32)
 
@@ -315,8 +310,6 @@ class RaycasterRenderer(
             safetyMode = safetyMode,
             rng = rng
         )
-
-        bitmap.setPixels(postPixels, 0, WIDTH, 0, 0, WIDTH, HEIGHT)
     }
 
     private fun sampleFloorPixel(
@@ -470,7 +463,7 @@ class RaycasterRenderer(
                     b = grain - 10
                 }
 
-                postPixels[rowOff + x] = (0xFF shl 24) or
+                pixels[rowOff + x] = (0xFF shl 24) or
                     (r.coerceIn(0, 255) shl 16) or
                     (g.coerceIn(0, 255) shl 8) or
                     b.coerceIn(0, 255)
